@@ -23,7 +23,7 @@ import getopt, sys, os
 from xml.etree.ElementTree import *
 from datetime import *
 import logging
-import ConfigParser
+import configparser
 
 
 
@@ -79,7 +79,7 @@ def setlogger(logfilename,loggername, thelevel=logging.INFO):
         logger.debug("File logging to " + logfilename)
         return logger
     except IOError:
-        print "ERROR: Failed to initialize logger with logfile: " + logfilename
+        print ("ERROR: Failed to initialize logger with logfile: " + logfilename)
         sys.exit(2)
 
 
@@ -173,7 +173,7 @@ def iniFileSetUp(configfile,logger):
 
     """
 
-    config = ConfigParser.SafeConfigParser()
+    config = configparser.ConfigParser()
     config.optionxform = str
     if os.path.exists(configfile):
         config.read(configfile)
@@ -250,8 +250,8 @@ def getStartTimefromRuninfo(xmlfile):
 
 def usage(*args):
     sys.stdout = sys.stderr
-    for msg in args: print msg
-    print __doc__
+    for msg in args: print (msg)
+    print (__doc__)
     sys.exit(0)
 
 def date_range(start, end, timestepsecs):
@@ -284,7 +284,7 @@ def main(argv=None):
     ########################################################################
     try:
         opts, args = getopt.getopt(argv, 'R:u:p:i:o:dl:')
-    except getopt.error, msg:
+    except getopt.error as msg:
         usage(msg)
 
 
@@ -295,7 +295,7 @@ def main(argv=None):
         if o == '-R': runinfofile = a
         if o == '-h': usage()
         if o == '-d': cert_checking = False
-        if o == '-l': exec "loglevel = logging." + a
+        if o == '-l': exec("loglevel = logging." + a)
 
     thelogger = setlogger('vds_api_download.log','vds',thelevel=loglevel)
 
