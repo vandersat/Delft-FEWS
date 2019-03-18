@@ -136,7 +136,7 @@ VDS servers.
     </generalAdapterRun>
 
 
-Tiemseries import
+Timeseries import
 ~~~~~~~~~~~~~~~~~
 
 In this step the netcdf data is read into the system
